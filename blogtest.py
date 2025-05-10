@@ -1,10 +1,13 @@
 import pyautogui
 import time
-import pyperclip # クリップボード操作用のライブラリが必要です (pip install pyperclip)
+import pyperclip
 import os
 import glob
 import shutil
 import subprocess
+import schedule
+import datetime
+import sys
 
 # --- 関数定義 ---
 def create_new_blog_folder():
@@ -83,126 +86,159 @@ def publish_to_github():
         print(f"予期せぬエラーが発生しました: {e}")
         raise
 
-# テキスト入力前の待機時間（秒） #カーソルの座標はパソコンによってそれぞれ異なりますので、適宜変更してください。
-WAIT_BEFORE_INPUT = 10
+def run_scheduled():
+    print(f"\n=== スケジュール実行を開始します（{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}） ===")
+    success = main_process()
+    if not success:
+        print("エラーが発生しました。次のスケジュール実行をお待ちください。")
 
-# --- 最初の操作セット ---
-first_target_x = 300
-first_target_y = 750
-first_text_to_type = "https://www.genspark.ai/?ref"
+def run_scheduler():
+    show_initial_messages()
+    print("\nスケジューラーを開始します。")
+    print("実行スケジュール:")
+    print("- 毎日 午前4:00")
+    print("- 毎日 午前4:30")
+    
+    # スケジュールの設定
+    schedule.every().day.at("04:00").do(run_scheduled)
+    schedule.every().day.at("04:30").do(run_scheduled)
+    
+    try:
+        while True:
+            # 次の実行までの時間を計算
+            next_run = schedule.next_run()
+            if next_run:
+                time_until_next = next_run - datetime.datetime.now()
+                print(f"\n次の実行まで: {time_until_next}")
+            
+            schedule.run_pending()
+            time.sleep(60)  # 1分ごとにスケジュールをチェック
+            
+    except KeyboardInterrupt:
+        print("\nプログラムを終了します。Ctrl+Cが押されました。")
+        sys.exit(0)
+    except Exception as e:
+        print(f"\n予期せぬエラーが発生しました: {e}")
+        sys.exit(1)
 
-# --- 次の操作セット ---
-second_target_x = 450
-second_target_y = 220 # <-- ご使用の画面解像度によってはこのY座標が存在しない場合があります。ご確認ください。
-second_text_to_type = "今日の世界のニュースの中で興味深いものを見つけ出しブログ記事にまとめてください"
+def main_process():
+    try:
+        # --- 最初の操作を実行 ---
+        print(f"\n1. カーソルを X:300, Y:750 に移動してクリックします。")
+        pyautogui.click(300, 750)
 
-# --- 追加の操作 ---
-third_target_x = 1130
-third_target_y = 460
+        print(f"   クリックしました。10秒待機します...")
+        time.sleep(10)
 
-# --- 長押し操作の設定 ---
-long_press_x = 1333
-long_press_y = 200
-long_press_duration = 20 # 長押しする時間（秒）
+        print(f"   「https://www.genspark.ai/?ref」をクリップボードにコピーして貼り付けます...")
+        pyperclip.copy("https://www.genspark.ai/?ref")
+        time.sleep(0.5) # クリップボードへのコピーが完了するまで少し待つ
 
-# --- 追加の操作設定 ---
-blog_click_x = 1290
-blog_click_y = 230
+        # 貼り付けのキーボードショートカットを実行
+        # お使いのOSに合わせてコメントを切り替えてください
+        # Windows/Linux の場合: Ctrl+V
+        pyautogui.hotkey('ctrl', 'v')
+        # macOS の場合: Cmd+V
+        # pyautogui.hotkey('command', 'v')
+        print("   貼り付け完了。")
 
-print("--- 自動操作を開始します ---")
-print(f"各テキスト入力前に {WAIT_BEFORE_INPUT} 秒待機します。")
-print("操作を停止するには、マウスカーソルを画面の左上隅に素早く移動してください。") # Fail-Safeの説明
+        # ユーザーが追加した待機時間
+        time.sleep(10)
 
-try:
-    # --- 最初の操作を実行 ---
-    print(f"\n1. カーソルを X:{first_target_x}, Y:{first_target_y} に移動してクリックします。")
-    pyautogui.click(first_target_x, first_target_y)
+        # --- 次の操作を実行 ---
+        print(f"\n2. カーソルを X:450, Y:220 に移動してクリックします。")
+        pyautogui.click(450, 220)
 
-    print(f"   クリックしました。{WAIT_BEFORE_INPUT}秒待機します...")
-    time.sleep(WAIT_BEFORE_INPUT)
+        print(f"   クリックしました。10秒待機します...")
+        time.sleep(10)
 
-    print(f"   「{first_text_to_type}」をクリップボードにコピーして貼り付けます...")
-    pyperclip.copy(first_text_to_type)
-    time.sleep(0.5) # クリップボードへのコピーが完了するまで少し待つ
+        # --- 以前追加した操作 (800, 400へのクリック) ---
+        print(f"   追加操作: カーソルを X:800, Y:400 に移動してクリックします。")
+        pyautogui.click(800, 400)
+        print("   追加操作: クリック完了。")
+        # --- 以前追加した操作ここまで ---
 
-    # 貼り付けのキーボードショートカットを実行
-    # お使いのOSに合わせてコメントを切り替えてください
-    # Windows/Linux の場合: Ctrl+V
-    pyautogui.hotkey('ctrl', 'v')
-    # macOS の場合: Cmd+V
-    # pyautogui.hotkey('command', 'v')
-    print("   貼り付け完了。")
+        print(f"   「今日の世界のニュースの中で興味深いものを見つけ出しブログ記事にまとめてください」をクリップボードにコピーして貼り付けます...")
+        pyperclip.copy("今日の世界のニュースの中で興味深いものを見つけ出しブログ記事にまとめてください")
+        time.sleep(0.5) # クリップボードへのコピーが完了するまで少し待つ
 
-    # ユーザーが追加した待機時間
-    time.sleep(WAIT_BEFORE_INPUT)
+        # 貼り付けのキーボードショートカットを実行
+        # お使いのOSに合わせてコメントを切り替えてください
+        # Windows/Linux の場合: Ctrl+V
+        pyautogui.hotkey('ctrl', 'v')
+        # macOS の場合: Cmd+V
+        # pyautogui.hotkey('command', 'v')
+        print("   貼り付け完了。")
 
-    # --- 次の操作を実行 ---
-    print(f"\n2. カーソルを X:{second_target_x}, Y:{second_target_y} に移動してクリックします。")
-    pyautogui.click(second_target_x, second_target_y)
+        # --- 追加の操作 (1130, 460へのクリック) を実行 ---
+        # 2番目のテキスト入力後に続けて実行します
+        print(f"\n3. カーソルを X:1130, Y:460 に移動してクリックします。")
+        pyautogui.click(1130, 460)
+        print("   クリック完了。")
 
-    print(f"   クリックしました。{WAIT_BEFORE_INPUT}秒待機します...")
-    time.sleep(WAIT_BEFORE_INPUT)
+        # --- 新規追加した操作 (長押し) ---
+        print("10分待ちます")
+        time.sleep(600)
+        pyautogui.click(930, 160)
+        print(f"\n4. カーソルを X:1333, Y:200 に移動して 20秒間長押しします。")
+        # 指定座標に移動
+        pyautogui.moveTo(1333, 200)
+        # マウスボタンを押し下げる
+        pyautogui.mouseDown(1333, 200)
+        print(f"   マウスボタンを押し下げました。20秒待機します...")
+        # 指定時間待機
+        time.sleep(20)
+        # マウスボタンを離す
+        pyautogui.mouseUp(1333, 200)
+        print("   長押し完了。マウスボタンを離しました。")
 
-    # --- 以前追加した操作 (800, 400へのクリック) ---
-    print(f"   追加操作: カーソルを X:800, Y:400 に移動してクリックします。")
-    pyautogui.click(800, 400)
-    print("   追加操作: クリック完了。")
-    # --- 以前追加した操作ここまで ---
+        # --- ブログ記事の保存と公開 ---
+        print(f"\n5. カーソルを X:1290, Y:230 に移動してクリックします。")
+        pyautogui.click(1290, 230) #この動作でブログ記事のコピーが完了します。既にhtml形式になっているので、そのまま
+        print("   クリック完了。")
 
-    print(f"   「{second_text_to_type}」をクリップボードにコピーして貼り付けます...")
-    pyperclip.copy(second_text_to_type)
-    time.sleep(0.5) # クリップボードへのコピーが完了するまで少し待つ
+        # 新しいブログフォルダを作成
+        new_folder = create_new_blog_folder()
+        print(f"   新しいフォルダを作成しました: {new_folder}")
 
-    # 貼り付けのキーボードショートカットを実行
-    # お使いのOSに合わせてコメントを切り替えてください
-    # Windows/Linux の場合: Ctrl+V
-    pyautogui.hotkey('ctrl', 'v')
-    # macOS の場合: Cmd+V
-    # pyautogui.hotkey('command', 'v')
-    print("   貼り付け完了。")
+        # index.htmlを作成して内容を保存
+        create_index_html(new_folder)
+        print(f"   {new_folder}/index.htmlを作成しました")
 
-    # --- 追加の操作 (1130, 460へのクリック) を実行 ---
-    # 2番目のテキスト入力後に続けて実行します
-    print(f"\n3. カーソルを X:{third_target_x}, Y:{third_target_y} に移動してクリックします。")
-    pyautogui.click(third_target_x, third_target_y)
-    print("   クリック完了。")
+        # GitHubに公開
+        publish_to_github()
 
-    # --- 新規追加した操作 (長押し) ---
-    print("10分待ちます")
-    time.sleep(600)
-    pyautogui.click(930, 160)
-    print(f"\n4. カーソルを X:{long_press_x}, Y:{long_press_y} に移動して {long_press_duration}秒間長押しします。")
-    # 指定座標に移動
-    pyautogui.moveTo(long_press_x, long_press_y)
-    # マウスボタンを押し下げる
-    pyautogui.mouseDown(long_press_x, long_press_y)
-    print(f"   マウスボタンを押し下げました。{long_press_duration}秒待機します...")
-    # 指定時間待機
-    time.sleep(long_press_duration)
-    # マウスボタンを離す
-    pyautogui.mouseUp(long_press_x, long_press_y)
-    print("   長押し完了。マウスボタンを離しました。")
+        print("\n--- すべての操作が完了しました ---")
+        return True
+    except pyautogui.FailSafeException:
+        print("\n--- Fail-Safe トリガー: カーソルを画面左上に移動したため処理を停止しました ---", flush=True)
+        return False
+    except Exception as e:
+        print(f"\n--- エラーが発生しました ---", flush=True)
+        print(f"エラー内容: {e}", flush=True)
+        return False
 
-    # --- ブログ記事の保存と公開 ---
-    print(f"\n5. カーソルを X:{blog_click_x}, Y:{blog_click_y} に移動してクリックします。")
-    pyautogui.click(blog_click_x, blog_click_y) #この動作でブログ記事のコピーが完了します。既にhtml形式になっているので、そのまま
-    print("   クリック完了。")
+def show_initial_messages():
+    print("--- 自動操作を開始します ---")
+    print(f"各テキスト入力前に 10 秒待機します。")
+    print("操作を停止するには、マウスカーソルを画面の左上隅に素早く移動してください。") # Fail-Safeの説明
 
-    # 新しいブログフォルダを作成
-    new_folder = create_new_blog_folder()
-    print(f"   新しいフォルダを作成しました: {new_folder}")
+def run_with_loop():
+    show_initial_messages()
+    while True:
+        main_process()
 
-    # index.htmlを作成して内容を保存
-    create_index_html(new_folder)
-    print(f"   {new_folder}/index.htmlを作成しました")
-
-    # GitHubに公開
-    publish_to_github()
-
-    print("\n--- すべての操作が完了しました ---")
-
-except pyautogui.FailSafeException:
-    print("\n--- Fail-Safe トリガー: カーソルを画面左上に移動したため処理を停止しました ---", flush=True)
-except Exception as e:
-    print(f"\n--- エラーが発生しました ---", flush=True)
-    print(f"エラー内容: {e}", flush=True)
+# プログラムの実行
+if __name__ == "__main__":
+    # コマンドライン引数でモードを選択
+    if len(sys.argv) > 1 and sys.argv[1] == "--schedule":
+        run_scheduler()
+    else:
+        print("使用方法:")
+        print("通常実行: python blogtest.py")
+        print("スケジュール実行: python blogtest.py --schedule")
+        choice = input("スケジュール実行を開始しますか？ (y/n): ").lower()
+        if choice == 'y':
+            run_scheduler()
+        else:
+            run_with_loop()  # 通常の繰り返し実行
