@@ -33,12 +33,14 @@ def create_index_html(folder_name):
 def publish_to_github():
     try:
         # Gitリポジトリの設定を確認
-        repo_url = "https://github.com/raikichi-hypp/AI-blog-writing.git"  # あなたのリポジトリURLに置き換えてください
+        repo_url = "https://github.com/raikichi-hypp/AI-blog-writing.git"
         
         # Gitリポジトリが初期化されているか確認
+        is_new_repo = False
         if not os.path.exists(".git"):
             subprocess.run(["git", "init"], check=True)
             subprocess.run(["git", "remote", "add", "origin", repo_url], check=True)
+            is_new_repo = True
         else:
             # リモートURLを確認・更新
             try:
@@ -49,10 +51,25 @@ def publish_to_github():
                 # originが設定されていない場合
                 subprocess.run(["git", "remote", "add", "origin", repo_url], check=True)
 
+        # 現在のブランチ名を確認
+        try:
+            current_branch = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"], text=True).strip()
+        except subprocess.CalledProcessError:
+            # 初回コミット前は branch がない
+            current_branch = None
+
         # Gitコマンドを実行
         subprocess.run(["git", "add", "."], check=True)
         subprocess.run(["git", "commit", "-m", f"Add new blog post {time.strftime('%Y-%m-%d %H:%M:%S')}"], check=True)
-        subprocess.run(["git", "push", "-u", "origin", "main"], check=True)  # ブランチ名を明示的に指定
+
+        if is_new_repo or not current_branch:
+            # 新規リポジトリの場合、mainブランチを作成
+            subprocess.run(["git", "branch", "-M", "main"], check=True)
+            subprocess.run(["git", "push", "-u", "origin", "main"], check=True)
+        else:
+            # 既存のリポジトリの場合、現在のブランチにプッシュ
+            subprocess.run(["git", "push", "-u", "origin", current_branch], check=True)
+
         print("Successfully published to GitHub")
     except subprocess.CalledProcessError as e:
         print(f"Git操作でエラーが発生しました: {e}")
