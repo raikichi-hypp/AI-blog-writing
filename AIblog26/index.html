@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【2025年5月29日】投資最前線：エヌビディア好決算と関税措置差し止めで日経平均急反発</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9fafb;
+        }
+        .article-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin: 16px 0;
+            font-style: italic;
+            color: #4b5563;
+        }
+        .tag {
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            padding: 4px 12px;
+            font-size: 0.875rem;
+            color: #4b5563;
+            margin-right: 8px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .highlight-box {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 24px 0;
+            background-color: #f3f4f6;
+        }
+        .highlight-box h3 {
+            margin-top: 0;
+            color: #2563eb;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #e5e7eb;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f3f4f6;
+        }
+        .section-divider {
+            height: 2px;
+            background-color: #e5e7eb;
+            margin: 32px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="article-container">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold mb-4 text-blue-800">【2025年5月29日】投資最前線：エヌビディア好決算と関税措置差し止めで日経平均急反発</h1>
+            <div class="flex flex-wrap items-center text-gray-600 mb-4">
+                <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i> 2025年5月29日</span>
+                <span class="mr-4"><i class="far fa-user mr-1"></i> 投資アナリスト</span>
+                <span><i class="far fa-folder mr-1"></i> 経済・投資</span>
+            </div>
+            <div class="flex flex-wrap mb-4">
+                <span class="tag">#エヌビディア</span>
+                <span class="tag">#半導体</span>
+                <span class="tag">#日経平均</span>
+                <span class="tag">#円安</span>
+                <span class="tag">#トランプ関税</span>
+                <span class="tag">#AI投資</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="mb-8">
+                <p class="text-lg font-medium mb-4">2025年5月29日の東京株式市場は、米半導体大手エヌビディアの好決算と米国際貿易裁判所によるトランプ関税の差し止め命令、そして円安進行を背景に、日経平均株価が大幅に反発しました。本日のマーケットで起きた重要な動きとその背景を詳しく解説します。</p>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-blue-700">日経平均株価が710円超の急反発</h2>
+                <p class="mb-4">29日の東京株式市場では、日経平均株価が前日比710円58銭（1.88%）高の3万8432円98銭と大幅反発で取引を終えました。東証株価指数（TOPIX）も42.51ポイント（1.53%）上昇し、2812.02で終了しました。1日の出来高は18億6979万株に達しています。</p>
+                
+                <div class="highlight-box">
+                    <h3 class="text-xl font-semibold mb-2">本日の市場概況</h3>
+                    <ul class="list-disc pl-5">
+                        <li>日経平均株価：38,432.98円（+710.58円、+1.88%）</li>
+                        <li>TOPIX：2,812.02（+42.51、+1.53%）</li>
+                        <li>出来高：18億6979万株</li>
+                    </ul>
+                </div>
+
+                <div class="chart-container mt-6">
+                    <canvas id="stockChart"></canvas>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-blue-700">エヌビディア好決算が市場をけん引</h2>
+                
+                <p class="mb-4">米半導体大手のエヌビディアが5月28日（日本時間29日早朝）に発表した2025年2-4月期決算が市場予想を上回り、AI関連銘柄を中心に買いが広がりました。</p>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">エヌビディア決算のポイント</h3>
+                        <ul class="list-disc pl-5 mb-4">
+                            <li>売上高：前年同期比+69.2%の440.62億ドル（市場予想：433.40億ドル）</li>
+                            <li>調整後総利益率：61.0%（市場予想：57.7%）</li>
+                            <li>調整後EPS：前年同期比+32.8%の0.81ドル（市場予想：0.73ドル）</li>
+                        </ul>
+                        
+                        <p class="mb-4">特にデータセンター向け売上高が前年同期比+73.3％、前四半期比+9.9％の391.12億ドルと高成長を維持しており、AI関連投資の継続的な拡大を裏付ける結果となりました。</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">市場への影響</h3>
+                        <p class="mb-4">エヌビディアの決算発表後、同社株は時間外取引で前日終値比約5%上昇。この好影響は他の半導体関連銘柄にも波及し、東京市場でも半導体製造装置や電子部品関連の銘柄が買われる展開となりました。</p>
+                        
+                        <blockquote>
+                            「AIインフラに対する世界的な需要が非常に強い」<br>
+                            - ジェンスン・ファン CEO（エヌビディア）
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="section-divider"></div>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-blue-700">トランプ関税差し止め命令で警戒感和らぐ</h2>
+                
+                <p class="mb-4">米国際貿易裁判所は28日、トランプ大統領が発動した一連の関税の大部分に対して差し止め命令を出しました。裁判所は「輸入品に全面的に課税することは大統領の権限を逸脱している」と判断し、10日以内に関税を停止するための行政命令を出すよう命じています。</p>
+                
+                <div class="highlight-box">
+                    <h3 class="text-xl font-semibold mb-2">差し止め対象となった関税</h3>
+                    <ul class="list-disc pl-5">
+                        <li>「相互関税」（全ての輸入品に一律10%の関税）</li>
+                        <li>違法薬物対策などを名目にカナダ・メキシコ・中国にかけている追加関税</li>
+                    </ul>
+                    <p class="mt-2 text-sm">※ただし自動車・鉄鋼・アルミニウム関税については、裁判所は判断を求められていないため対象外</p>
+                </div>
+                
+                <p class="mt-4">この判断を受けてトランプ政権側は直ちに控訴しましたが、市場では関税を巡る不確実性がいくぶん和らいだとの見方から、リスク選好姿勢が強まりました。</p>
+                
+                <blockquote>
+                    「この判決は政権の関税計画にとって後退を意味し、不確実性を増大させるが、米国の主要貿易パートナーの大半にとって最終的な結果は変わらないかもしれない」<br>
+                    - アレック・フィリップス氏（ゴールドマン・サックス）
+                </blockquote>
+            </section>
+            
+            <div class="section-divider"></div>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-blue-700">円安進行が輸出関連株を後押し</h2>
+                
+                <p class="mb-4">29日の外国為替市場では円安ドル高が進行し、一時1ドル=146円台まで上昇しました。この円安を受けて、輸出関連企業の株価が押し上げられる展開となりました。</p>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>通貨ペア</th>
+                                    <th>レート</th>
+                                    <th>前日比</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ドル/円</td>
+                                    <td>145.71円</td>
+                                    <td>+1.23円</td>
+                                </tr>
+                                <tr>
+                                    <td>ユーロ/円</td>
+                                    <td>158.35円</td>
+                                    <td>+0.95円</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">円安要因</h3>
+                        <ul class="list-disc pl-5">
+                            <li>トランプ関税への警戒感の緩和</li>
+                            <li>リスク選好の市場センチメント</li>
+                            <li>日米金利差の拡大</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <p class="mt-4">円安進行により自動車や電機など輸出関連企業の収益改善期待が高まり、こうした銘柄への投資が活発化しました。市場関係者からは「円安が輸出企業の業績に好影響をもたらすとの見方から、輸出関連株を中心に買いが入った」との声が聞かれています。</p>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-blue-700">海外投資家の買い意欲も継続</h2>
+                
+                <p class="mb-4">東京証券取引所が29日に発表した5月第4週（19日〜23日）の投資部門別株式売買動向によると、海外投資家（外国人）は8週連続で買い越しとなっており、日本株への投資意欲の高さが伺えます。</p>
+                
+                <div class="chart-container mt-4">
+                    <canvas id="investorChart"></canvas>
+                </div>
+                
+                <p class="mt-4">海外投資家の継続的な買い姿勢は、日本企業のガバナンス改革や株主還元の強化、そして円安による割安感などが背景にあると分析されています。</p>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-blue-700">今後の注目点</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="highlight-box">
+                        <h3 class="text-xl font-semibold mb-2">短期の注目イベント</h3>
+                        <ul class="list-disc pl-5">
+                            <li>6月3日：WSTS（世界半導体市場統計）2025年春季見通し発表</li>
+                            <li>6月9〜13日：アップルのWWDC（World-wide Developer Conference）開催</li>
+                            <li>トランプ政権の関税措置を巡る動向</li>
+                            <li>円相場の変動</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3 class="text-xl font-semibold mb-2">中長期の投資テーマ</h3>
+                        <ul class="list-disc pl-5">
+                            <li>AI関連投資の継続と裾野拡大</li>
+                            <li>自動車向けや産業用途半導体の需要回復</li>
+                            <li>日本企業の株主還元強化</li>
+                            <li>グローバル貿易環境の変化</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <section class="mb-4">
+                <h2 class="text-2xl font-bold mb-4 text-blue-700">まとめ</h2>
+                
+                <p class="mb-4">29日の東京株式市場は、エヌビディアの好決算による半導体関連銘柄の上昇、アメリカの関税措置への警戒感緩和、そして円安進行を背景に、日経平均株価が700円超の大幅反発となりました。</p>
+                
+                <p class="mb-4">特にAI関連の半導体需要が引き続き堅調であることが確認され、この分野への投資意欲は依然として高い状態です。また、トランプ関税を巡る不透明感が和らいだことで、短期的にはリスク選好の姿勢が強まる可能性があります。</p>
+                
+                <p>一方で、アメリカの関税政策の行方や金融政策の動向など、引き続き注視すべきリスク要因も存在します。投資家は今後のWSTSの半導体市場予測やアップルの開発者会議など、重要イベントからの情報を参考にしながら、慎重な投資判断が求められるでしょう。</p>
+            </section>
+        </main>
+
+        <footer class="mt-12 pt-8 border-t border-gray-200">
+            <div class="flex flex-wrap justify-between items-center">
+                <div>
+                    <p class="text-gray-600">© 2025 投資情報ブログ All Rights Reserved.</p>
+                </div>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-600 hover:text-blue-700"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-gray-600 hover:text-blue-700"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="#" class="text-gray-600 hover:text-blue-700"><i class="fab fa-linkedin fa-lg"></i></a>
+                </div>
+            </div>
+            <p class="mt-4 text-sm text-gray-500">※本記事は情報提供を目的としており、投資勧誘を目的として作成したものではありません。投資に関する最終決定はご自身の判断でなさるようお願いいたします。</p>
+        </footer>
+    </div>
+
+    <script>
+        // 日経平均株価チャート
+        const stockChart = new Chart(
+            document.getElementById('stockChart'),
+            {
+                type: 'line',
+                data: {
+                    labels: ['5/22', '5/23', '5/24', '5/27', '5/28', '5/29'],
+                    datasets: [{
+                        label: '日経平均株価（円）',
+                        data: [37500, 37650, 37800, 37900, 37722, 38432],
+                        borderColor: 'rgb(59, 130, 246)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '直近一週間の日経平均株価推移',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 37000,
+                            title: {
+                                display: true,
+                                text: '円'
+                            }
+                        }
+                    }
+                }
+            }
+        );
+
+        // 投資家別売買動向チャート
+        const investorChart = new Chart(
+            document.getElementById('investorChart'),
+            {
+                type: 'bar',
+                data: {
+                    labels: ['4月第1週', '4月第2週', '4月第3週', '4月第4週', '5月第1週', '5月第2週', '5月第3週', '5月第4週'],
+                    datasets: [{
+                        label: '海外投資家（億円）',
+                        data: [1500, 2100, 1800, 2300, 2600, 2400, 2700, 2850],
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '海外投資家の買越額推移（億円）',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '億円'
+                            }
+                        }
+                    }
+                }
+            }
+        );
+    </script>
+</body>
+</html>
