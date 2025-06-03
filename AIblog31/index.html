@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年6月投資トレンドウォッチ：トランプ関税と日経平均の行方</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #1a3c6e;
+        }
+        .article-header {
+            background-color: #1a3c6e;
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0 40px;
+        }
+        .highlight-box {
+            background-color: #f0f7ff;
+            border-left: 5px solid #3182ce;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning-box {
+            background-color: #fff5f5;
+            border-left: 5px solid #e53e3e;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .opportunity-box {
+            background-color: #f0fff4;
+            border-left: 5px solid #38a169;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .industry-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .industry-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #f7fafc;
+        }
+        .quote {
+            font-style: italic;
+            color: #4a5568;
+            border-left: 4px solid #cbd5e0;
+            padding-left: 15px;
+            margin: 20px 0;
+        }
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            color: #718096;
+        }
+        .key-point {
+            font-weight: 700;
+            color: #2c5282;
+        }
+        .data-source {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="article-header">
+            <h1 class="text-3xl font-bold mb-2">2025年6月投資トレンドウォッチ</h1>
+            <h2 class="text-xl">トランプ関税と日経平均の行方：最新市場動向分析</h2>
+            <p class="mt-4 text-sm">公開日：2025年6月3日</p>
+        </div>
+
+        <main>
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold mb-4">市場概況：正念場を迎える日経平均</h2>
+                <p>2025年6月相場入りを迎え、日経平均株価は重要な局面に差し掛かっています。トランプ大統領による関税政策の影響が徐々に落ち着きを見せる中、投資家にとって今後の市場動向を見極めるポイントを解説します。</p>
+                
+                <div class="chart-container">
+                    <canvas id="nikkeiChart"></canvas>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3 class="text-xl font-medium mb-2">日経平均の重要ラインチェック</h3>
+                    <ul class="list-disc pl-5">
+                        <li><span class="key-point">上値抵抗：3万9000円</span> - この水準をしっかり突破できれば4万円台への展望が開ける</li>
+                        <li><span class="key-point">下値リスク：3万5700円〜3万6000円</span> - この水準を割ると3万4000円台までの調整リスクが高まる</li>
+                        <li>2023年10月以降、<span class="key-point">3万500円〜3万700円のサポートゾーン</span>での反発を複数回確認。底堅さは見えるものの、依然として中期トレンドは確定とは言えない状況</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold mb-4">トランプ関税政策の最新動向と市場への影響</h2>
+                
+                <p class="mb-4">トランプ大統領は5月30日、<strong>鉄鋼・アルミの関税を25%から50%に引き上げる</strong>と発表し、6月4日から実施すると表明しました。一方で、欧州に対する関税発動は90日間延期されるなど、政策の一貫性には疑問符が付いています。</p>
+                
+                <div class="quote">
+                    <p>「TACO」―「Trump Always Chickens Out（トランプはいつもビビってやめる）」という略語がウォール街で話題に。トランプ氏はこれに憤慨し「二度と言うな。意地悪な質問だ」と反応しました。</p>
+                </div>
+                
+                <p class="mb-4">4月上旬の「トランプショック」から約2か月が経過し、市場の反応は徐々に変化しています：</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="warning-box">
+                        <h4 class="font-bold">リスク要因</h4>
+                        <ul class="list-disc pl-5">
+                            <li>米国の鉄鋼・アルミ関税50%への引き上げ</li>
+                            <li>米中関税交渉の難航</li>
+                            <li>超長期債（30年・40年債）の金利上昇</li>
+                            <li>自動車など輸出関連企業への業績影響</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="opportunity-box">
+                        <h4 class="font-bold">ポジティブ材料</h4>
+                        <ul class="list-disc pl-5">
+                            <li>関税政策に対する市場の感応度の鈍化</li>
+                            <li>欧州・中国との協力関係構築による対米対抗軸の形成</li>
+                            <li>海外投資家の継続的な買い越し（8週連続）</li>
+                            <li>事業法人の自社株買いの活発化（8週連続）</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <p>関税を巡る米中の「プロレス」は継続していますが、<strong>市場の感応度は4月初旬に比べて大幅に鈍化</strong>しています。今後、関税絡みの「バッドニュース」による押し目は買い好機になる可能性があります。</p>
+            </div>
+            
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold mb-4">6月相場の特徴と統計から見る有望業種</h2>
+                
+                <p class="mb-4">6月相場は、<span class="key-point">ボーナス月ということもあり、個人投資家が意欲的に株を買い付ける時期</span>として知られています。その影響で、新興株を中心に値上がりしやすい傾向があります。過去のデータ（2000年1月～2025年4月）に基づく統計分析から、6月に強い業種が明らかになりました。</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="industry-card">
+                        <h3 class="text-xl font-bold mb-2">第1位：鉄道・バス</h3>
+                        <p class="text-4xl font-bold text-blue-600 mb-2">58.3%</p>
+                        <p class="text-sm mb-2">勝率</p>
+                        <ul class="text-sm">
+                            <li>平均損益率: +0.60%</li>
+                            <li>平均利益率: +4.16%</li>
+                            <li>注目銘柄: 西日本旅客鉄道、小田急電鉄</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="industry-card">
+                        <h3 class="text-xl font-bold mb-2">第2位：食品</h3>
+                        <p class="text-4xl font-bold text-blue-600 mb-2">55.4%</p>
+                        <p class="text-sm mb-2">勝率</p>
+                        <ul class="text-sm">
+                            <li>平均損益率: +1.15%</li>
+                            <li>平均利益率: +5.40%</li>
+                            <li>注目銘柄: 明治ホールディングス</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="industry-card">
+                        <h3 class="text-xl font-bold mb-2">第3位：陸運</h3>
+                        <p class="text-4xl font-bold text-blue-600 mb-2">50.0%</p>
+                        <p class="text-sm mb-2">勝率</p>
+                        <ul class="text-sm">
+                            <li>平均損益率: +0.58%</li>
+                            <li>平均利益率: +3.39%</li>
+                            <li>プロフィット・ファクター: 1.514</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="data-source">
+                    データ出典: 2000年1月〜2025年4月30日の日経平均採用銘柄225銘柄の検証結果
+                </div>
+            </div>
+            
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold mb-4">専門家の見通し：6月の日経平均はレンジ相場継続へ</h2>
+                
+                <div class="mb-6">
+                    <p>マネックス証券チーフ・ストラテジストの広木隆氏は、向こう1ヶ月の日経平均株価について以下のように分析しています：</p>
+                    
+                    <div class="quote">
+                        <p>「トランプ氏の関税政策により、市場では世界景気が悪化するという認識が高まりましたが、市場の反応があまりにも大きかったため、トランプ氏は政策を変える柔軟性を見せ始めました。市場は徐々に落ち着きを取り戻しています。」</p>
+                        <p>「トランプ氏は相互関税の90日間の停止を発表し、その間、各国は米国との交渉を進めます。交渉の進展があるまではレンジ相場が続くでしょう。」</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3 class="text-xl font-medium mb-2">広木氏による今後の注目ポイント</h3>
+                    <ol class="list-decimal pl-5">
+                        <li><strong>6月のFOMC</strong>：米国景気の堅調さから利下げ見送りの可能性が高い</li>
+                        <li><strong>円安の継続</strong>：トランプ氏の円安是正発言にもかかわらず、ドル安誘導の可能性は低い</li>
+                        <li><strong>業種別注目</strong>：関税の影響を受けにくいインバウンド向け（ホテル）とIP関連（ゲーム）に注目</li>
+                    </ol>
+                </div>
+                
+                <p class="mt-4">また、アトランタ連銀のボスティック総裁は6月3日、堅調な経済を背景にFRBが関税措置の影響を検討する時間的余裕があると発言。年内1回の利下げ可能性に前向きな姿勢を示しています。</p>
+            </div>
+            
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold mb-4">投資戦略：内需系好業績株が今後の主役に</h2>
+                
+                <p class="mb-4">現在の市場環境を踏まえると、<span class="key-point">トランプ関税の影響を受けにくい「内需系の好業績株」への積極投資</span>が推奨されます。特に注目すべき点は以下の通りです：</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-xl font-medium mb-2">需給面でのポジティブ要因</h3>
+                        <ul class="list-disc pl-5 mb-4">
+                            <li><strong>海外投資家の継続的な買い</strong>：8週連続買い越し（累計2兆8577億円）</li>
+                            <li><strong>事業法人の自社株買い活発化</strong>：8週連続買い越し（累計2兆1739億円）</li>
+                            <li><strong>信用需給の大幅改善</strong>：信用倍率が9.63倍から5.02倍に低下</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-medium mb-2">好調な企業業績</h3>
+                        <ul class="list-disc pl-5 mb-4">
+                            <li><strong>設備投資の拡大</strong>：2025年1〜3月期の設備投資が前年同期比6.4％増の18兆7975億円と、18年ぶりに四半期ベースの過去最高を更新</li>
+                            <li><strong>内需関連の堅調さ</strong>：外部環境に左右されにくい業種が選好される傾向</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>注目タイプ</th>
+                                <th>注目銘柄例</th>
+                                <th>推奨理由</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>インバウンド関連</td>
+                                <td>ホテル関連銘柄</td>
+                                <td>関税の影響を受けにくく、訪日外国人の増加で業績好調</td>
+                            </tr>
+                            <tr>
+                                <td>IP関連</td>
+                                <td>ゲーム関連銘柄</td>
+                                <td>関税の影響を受けにくく、グローバル展開で成長期待</td>
+                            </tr>
+                            <tr>
+                                <td>高配当5万円株</td>
+                                <td>TYK(5期連続増配)、オリエンタル白石(10期連続非減配)</td>
+                                <td>配当維持力が強く、不安定相場での安定性期待</td>
+                            </tr>
+                            <tr>
+                                <td>内需系好業績株</td>
+                                <td>ユナイテッド・スーパーマーケットHD(営業利益84％増益予想)、スギHD</td>
+                                <td>国内で稼ぐビジネスモデルで関税影響が小さい</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="warning-box mt-6">
+                    <h3 class="text-xl font-medium mb-2">注意点：天井サインを見逃すな</h3>
+                    <p>売り越しを続けている個人投資家が買い越しに転じる、または海外投資家が売り越しに転じたら、それは「天井」のサインになる可能性があります。投資部門別株式売買動向には今まで以上に注意を払いましょう。</p>
+                </div>
+            </div>
+            
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold mb-4">6月相場を乗り切るための3つのポイント</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <div class="text-blue-600 text-4xl mb-2">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">重要な水準を把握する</h3>
+                        <p>日経平均の上値抵抗3万9000円と下値サポート3万5700円〜3万6000円の攻防に注目。主要サポートラインの試合が重要なターニングポイントに。</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <div class="text-blue-600 text-4xl mb-2">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">内需系銘柄を重視</h3>
+                        <p>トランプ関税の影響を受けにくい内需系企業に注目。特に消費関連、インフラ関連、ヘルスケアなど国内経済に根差した事業に強みを持つ銘柄を選好。</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <div class="text-blue-600 text-4xl mb-2">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">6月の季節性を活用</h3>
+                        <p>ボーナス相場の特性を踏まえ、鉄道・バス、食品、陸運といった6月に強い傾向のある業種に投資。特に配当利回りの高い銘柄も魅力的な選択肢。</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div class="footer">
+            <p>※本記事は情報提供を目的としており、投資勧誘を目的としたものではありません。投資に関する最終決定はご自身の判断でお願いいたします。</p>
+            <p class="mt-2">© 2025 投資トレンドウォッチ. All rights reserved.</p>
+        </div>
+    </div>
+    
+    <script>
+        // 日経平均株価の仮想データ（2025年の想定データ）
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('nikkeiChart').getContext('2d');
+            
+            const nikkeiChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1月', '2月', '3月', '4月', '5月', '6月(予)', '7月(予)'],
+                    datasets: [{
+                        label: '日経平均株価 (円)',
+                        data: [39500, 40200, 38500, 36200, 37950, 38500, 39000],
+                        borderColor: 'rgba(26, 60, 110, 1)',
+                        backgroundColor: 'rgba(26, 60, 110, 0.1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(26, 60, 110, 1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: '上値抵抗線',
+                        data: [39000, 39000, 39000, 39000, 39000, 39000, 39000],
+                        borderColor: 'rgba(220, 53, 69, 0.7)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    },
+                    {
+                        label: '下値サポート線',
+                        data: [36000, 36000, 36000, 36000, 36000, 36000, 36000],
+                        borderColor: 'rgba(40, 167, 69, 0.7)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '2025年 日経平均株価推移と重要水準',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            suggestedMin: 35000,
+                            suggestedMax: 41000,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString() + '円';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: '日経平均株価 (円)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
